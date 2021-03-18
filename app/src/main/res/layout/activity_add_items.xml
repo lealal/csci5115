@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AddItems">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="139dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginRight="19dp"
-        android:onClick="addItem"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="188dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginLeft="87dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
         android:text="@string/add_items"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
