@@ -10,11 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Csci5115">
 
-        <activity android:name=".AddItems"
+
+        <activity android:name=".ViewItem">
                 android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity android:name=".AddItems"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
 
         <activity android:name=".RecipeFragment"
@@ -30,6 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
+
 
 
         <activity android:name=".MainActivity">
