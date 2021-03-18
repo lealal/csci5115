@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Csci5115">
+<<<<<<< HEAD
 
         <activity android:name=".AddItems"
                 android:parentActivityName=".MainActivity">
@@ -24,6 +25,9 @@
                 android:value=".MainActivity"/>
         </activity>
 
+=======
+        <activity android:name=".EditItems"></activity>
+>>>>>>> f0cf846... Added EditItem activity to the project
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
