@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Csci5115">
-<<<<<<< HEAD
 
         <activity android:name=".AddItems"
                 android:parentActivityName=".MainActivity">
@@ -25,9 +24,6 @@
                 android:value=".MainActivity"/>
         </activity>
 
-=======
-        <activity android:name=".RecipeFragment"></activity>
->>>>>>> c7d371d4edb06a2520d1623f9d891011ef46c4a5
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
