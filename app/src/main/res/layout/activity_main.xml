@@ -17,4 +17,21 @@
         android:text="@string/add_items"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="273dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginLeft="69dp"
+        android:layout_marginTop="519dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginRight="69dp"
+        android:layout_marginBottom="80dp"
+        android:onClick="viewRecipes"
+        android:text="@string/recipes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
