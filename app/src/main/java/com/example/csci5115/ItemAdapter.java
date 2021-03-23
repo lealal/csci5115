@@ -5,24 +5,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
 
-        private List<Item> itemList;
+    private List<Item> itemList;
+    private RecyclerViewClickInterface onClickListener;
 
-        public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public TextView itemName, itemAddedDate, location;
 
             public MyViewHolder(View view) {
                 super(view);
                 itemName = (TextView) view.findViewById(R.id.itemName);
+                view.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                onClickListener.onListItemClick(position);
+                Toast.makeText(v.getContext(), "Clicked()", Toast.LENGTH_SHORT).show();
             }
         }
 
         public ItemAdapter(List<Item> itemList) {
             this.itemList = itemList;
+        }
+
+         public ItemAdapter(RecyclerViewClickInterface onClickListener){
+            this.onClickListener = onClickListener;
         }
 
         @Override
