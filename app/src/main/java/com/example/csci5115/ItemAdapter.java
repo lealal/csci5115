@@ -1,6 +1,8 @@
 package com.example.csci5115;
 
 import java.util.List;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +28,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             @Override
             public void onClick(View v) {
                 int position = getAdapterPosition();
+                Log.d("a","onClick");
                 onClickListener.onListItemClick(position);
-                Toast.makeText(v.getContext(), "Clicked()", Toast.LENGTH_SHORT).show();
             }
         }
 
-        public ItemAdapter(List<Item> itemList) {
+        public ItemAdapter(List<Item> itemList, RecyclerViewClickInterface onClickListener) {
             this.itemList = itemList;
-        }
-
-         public ItemAdapter(RecyclerViewClickInterface onClickListener){
             this.onClickListener = onClickListener;
         }
 

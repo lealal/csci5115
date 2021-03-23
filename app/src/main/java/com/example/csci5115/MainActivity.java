@@ -6,18 +6,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    private List<Item> itemList = new ArrayList<>();
+public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface{
+    private List<Item> itemList = new ArrayList<Item>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
+
+    @Override
+    public void onListItemClick(int position) {
+        Log.d("on ListItemClick","on ListItemClick");
+        Toast.makeText(this, itemList.get(position).getItemName(), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        iAdapter = new ItemAdapter(itemList);
+        iAdapter = new ItemAdapter(itemList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
