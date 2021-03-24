@@ -1,5 +1,6 @@
 package com.example.csci5115;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
@@ -55,5 +56,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         @Override
         public int getItemCount() {
             return itemList.size();
+        }
+
+        public void setItemList(List<Item> newItemList){
+            itemList = newItemList;
         }
 }
