@@ -1,8 +1,9 @@
 package com.example.csci5115;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Item {
+public class Item implements Serializable {
     private String itemName;
     private Date itemAddedDate;
     private String location;

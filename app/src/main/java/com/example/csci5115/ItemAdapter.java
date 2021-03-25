@@ -59,7 +59,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         return itemList.size();
     }
 
-        public void setItemList(List<Item> newItemList){
-            itemList = newItemList;
-        }
+    public void setItemList(List<Item> newItemList) {
+        itemList = newItemList;
+    }
 }
