@@ -7,10 +7,6 @@ public class Item {
     private Date itemAddedDate;
     private String location;
 
-    public Item() {
-
-    }
-
     public Item(String itemName, Date itemAddedDate, String location) {
         this.itemName = itemName;
         this.itemAddedDate = itemAddedDate;
