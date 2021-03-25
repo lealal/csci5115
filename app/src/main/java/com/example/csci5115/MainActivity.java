@@ -36,12 +36,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-<<<<<<< HEAD
         recyclerView = findViewById(R.id.recyclerView);
-=======
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
->>>>>>> 3635077c7bd8eb840a8b69affdb234ef561e4ab7
 
         iAdapter = new ItemAdapter(itemList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
