@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class ViewItem extends AppCompatActivity {
     private Item item;
-    private TextView viewItem;
+    private TextView viewItem, viewDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,5 +17,7 @@ public class ViewItem extends AppCompatActivity {
         item = (Item) getIntent().getSerializableExtra("Item");
         viewItem = findViewById(R.id.viewItem);
         viewItem.setText(item.getItemName());
+        viewDate = findViewById(R.id.viewDate);
+        viewDate.setText(item.getItemAddedDate().toString());
     }
 }

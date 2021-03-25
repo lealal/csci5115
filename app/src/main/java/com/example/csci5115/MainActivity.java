@@ -20,6 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
     private List<Item> itemList = new ArrayList<>();
+    private List<Item> filteredList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     @Override
     public void onListItemClick(int position) {
         // This is where we will create intents and pass the itemList.get(position) object onto the next activity
-        Item item = itemList.get(position);
+        Item item = filteredList.get(position);
         Intent intent = new Intent(this, ViewItem.class);
         intent.putExtra("Item", item);
         startActivity(intent);
@@ -50,47 +51,42 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         recyclerView.setAdapter(iAdapter);
 
         prepareItemData();
+        filteredList = itemList;
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int pos = tab.getPosition();
+                filteredList = new ArrayList<>();
                 if (pos == 0) {
                     // all
-                    iAdapter.setItemList(itemList);
-                    recyclerView.setAdapter(iAdapter);
+                    for (Item i : itemList) {
+                        filteredList.add(i);
+                    }
                 } else if (pos == 1) {
                     // pantry
-                    List<Item> pantList = new ArrayList<Item>();
                     for (Item i : itemList) {
                         if (i.getLocation().equals("Pantry")) {
-                            pantList.add(i);
+                            filteredList.add(i);
                         }
                     }
-                    iAdapter.setItemList(pantList);
-                    recyclerView.setAdapter(iAdapter);
                 } else if (pos == 2) {
                     // fridge
-                    List<Item> fridList = new ArrayList<Item>();
                     for (Item i : itemList) {
                         if (i.getLocation().equals("Fridge")) {
-                            fridList.add(i);
+                            filteredList.add(i);
                         }
                     }
-                    iAdapter.setItemList(fridList);
-                    recyclerView.setAdapter(iAdapter);
                 } else if (pos == 3) {
                     // freezer
-                    List<Item> freeList = new ArrayList<Item>();
                     for (Item i : itemList) {
                         if (i.getLocation().equals("Freezer")) {
-                            freeList.add(i);
+                            filteredList.add(i);
                         }
                     }
-                    iAdapter.setItemList(freeList);
-                    recyclerView.setAdapter(iAdapter);
                 }
-
+                iAdapter.setItemList(filteredList);
+                recyclerView.setAdapter(iAdapter);
             }
 
             @Override
