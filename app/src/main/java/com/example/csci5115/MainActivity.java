@@ -11,6 +11,8 @@ import android.view.View;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
+    private TabLayout tabLayout;
 
     @Override
     public void onListItemClick(int position) {
@@ -33,7 +36,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+<<<<<<< HEAD
         recyclerView = findViewById(R.id.recyclerView);
+=======
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        tabLayout=(TabLayout)findViewById(R.id.tabLayout);
+>>>>>>> 3635077c7bd8eb840a8b69affdb234ef561e4ab7
 
         iAdapter = new ItemAdapter(itemList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -42,6 +50,62 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         recyclerView.setAdapter(iAdapter);
 
         prepareItemData();
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int pos = tab.getPosition();
+                if(pos == 0){
+                    // all
+                    iAdapter.setItemList(itemList);
+                    recyclerView.setAdapter(iAdapter);
+                }
+                else if(pos == 1){
+                    // pantry
+                    List<Item> pantList = new ArrayList<Item>();
+                    for(Item i : itemList){
+                        if(i.getLocation().equals("Pantry")){
+                            pantList.add(i);
+                        }
+                    }
+                    iAdapter.setItemList(pantList);
+                    recyclerView.setAdapter(iAdapter);
+                }
+                else if(pos == 2){
+                    // fridge
+                    List<Item> fridList = new ArrayList<Item>();
+                    for(Item i : itemList){
+                        if(i.getLocation().equals("Fridge")){
+                            fridList.add(i);
+                        }
+                    }
+                    iAdapter.setItemList(fridList);
+                    recyclerView.setAdapter(iAdapter);
+                }
+                else if(pos == 3){
+                    // freezer
+                    List<Item> freeList = new ArrayList<Item>();
+                    for(Item i : itemList){
+                        if(i.getLocation().equals("Freezer")){
+                            freeList.add(i);
+                        }
+                    }
+                    iAdapter.setItemList(freeList);
+                    recyclerView.setAdapter(iAdapter);
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     private void prepareItemData() {
@@ -49,49 +113,49 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = formatter.format(date);
         System.out.println(strDate);
-        Item item = new Item("Bananas", date, "Fridge");
+        Item item = new Item("Bananas", date, "Pantry");
         itemList.add(item);
 
-        item = new Item("Beef", date, "Fridge");
+        item = new Item("Beef", date, "Freezer");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Orange", date, "Pantry");
         itemList.add(item);
 
-        item = new Item("Beef", date, "Fridge");
+        item = new Item("Eggs", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Milk", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Beef", date, "Fridge");
+        item = new Item("Yogurt", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Spinach", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Beef", date, "Fridge");
+        item = new Item("Green Onions", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Cheddar", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Apples", date, "Pantry");
         itemList.add(item);
 
-        item = new Item("Beef", date, "Fridge");
+        item = new Item("Bread", date, "Pantry");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Mozzarella", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Tofu", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Beef", date, "Fridge");
+        item = new Item("Raspberries", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Fridge");
+        item = new Item("Butter", date, "Fridge");
         itemList.add(item);
     }
 

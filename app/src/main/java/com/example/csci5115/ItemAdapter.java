@@ -1,5 +1,6 @@
 package com.example.csci5115;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
@@ -31,6 +32,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             int position = getAdapterPosition();
             onClickListener.onListItemClick(position);
         }
+<<<<<<< HEAD
     }
 
     public ItemAdapter(List<Item> itemList, RecyclerViewClickInterface onClickListener) {
@@ -57,4 +59,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public int getItemCount() {
         return itemList.size();
     }
+=======
+
+        public void setItemList(List<Item> newItemList){
+            itemList = newItemList;
+        }
+>>>>>>> 3635077c7bd8eb840a8b69affdb234ef561e4ab7
 }
