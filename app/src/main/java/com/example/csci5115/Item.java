@@ -7,11 +7,20 @@ public class Item implements Serializable {
     private String itemName;
     private Date itemAddedDate;
     private String location;
+    private String image;
 
     public Item(String itemName, Date itemAddedDate, String location) {
         this.itemName = itemName;
         this.itemAddedDate = itemAddedDate;
         this.location = location;
+        this.image = "no_image";
+    }
+
+    public Item(String itemName, Date itemAddedDate, String location, String image) {
+        this.itemName = itemName;
+        this.itemAddedDate = itemAddedDate;
+        this.location = location;
+        this.image = image;
     }
 
     public String getItemName() {
@@ -36,5 +45,9 @@ public class Item implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getImage() {
+        return image;
     }
 }
