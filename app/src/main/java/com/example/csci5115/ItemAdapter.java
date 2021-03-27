@@ -32,6 +32,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             int position = getAdapterPosition();
             onClickListener.onListItemClick(position);
         }
+
     }
 
     public ItemAdapter(List<Item> itemList, RecyclerViewClickInterface onClickListener) {

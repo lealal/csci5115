@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     private List<Item> filteredList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
+    private ItemAdapter iAdapterCheckBoxes;
     private TabLayout tabLayout;
 
     @Override
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        recyclerView = findViewById(R.id.recyclerView);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(iAdapter);
+
 
         prepareItemData();
         filteredList = itemList;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                 }
                 iAdapter.setItemList(filteredList);
                 recyclerView.setAdapter(iAdapter);
+                iAdapterCheckBoxes.setItemList(filteredList);
             }
 
             @Override
