@@ -1,5 +1,7 @@
 package com.example.csci5115;
 
+import android.widget.CheckBox;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ public class Item implements Serializable {
     private Date itemAddedDate;
     private String location;
     private String image;
+    private CheckBox checkBox;
 
     public Item(String itemName, Date itemAddedDate, String location) {
         this.itemName = itemName;
@@ -50,4 +53,8 @@ public class Item implements Serializable {
     public String getImage() {
         return image;
     }
+
+    public void setCheckBox(CheckBox cb){this.checkBox = cb;}
+
+    public CheckBox getCheckBox(){return this.checkBox;}
 }

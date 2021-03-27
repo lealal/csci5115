@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,13 +18,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
     private List<Item> itemList;
     private RecyclerViewClickInterface onClickListener;
+    private RecyclerViewClickInterface getOnClickListenerCheckBox;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public Button itemName, itemAddedDate, location;
+        public CheckBox checkBox;
 
         public MyViewHolder(View view) {
             super(view);
             itemName = view.findViewById(R.id.itemName);
+            checkBox = view.findViewById(R.id.checkBox);
             itemName.setOnClickListener(this);
         }
 

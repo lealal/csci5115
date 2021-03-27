@@ -6,13 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     private List<Item> filteredList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
-    private ItemAdapter iAdapterCheckBoxes;
     private TabLayout tabLayout;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     public void onListItemClick(int position) {
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         iAdapter = new ItemAdapter(itemList, this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(iAdapter);
@@ -88,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                 }
                 iAdapter.setItemList(filteredList);
                 recyclerView.setAdapter(iAdapter);
-                iAdapterCheckBoxes.setItemList(filteredList);
             }
 
             @Override
@@ -132,26 +134,26 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         item = new Item("Green Onions", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Cheddar", date, "Fridge");
-        itemList.add(item);
-
-        item = new Item("Apples", date, "Pantry");
-        itemList.add(item);
-
-        item = new Item("Bread", date, "Pantry");
-        itemList.add(item);
-
-        item = new Item("Mozzarella", date, "Fridge");
-        itemList.add(item);
-
-        item = new Item("Tofu", date, "Fridge");
-        itemList.add(item);
-
-        item = new Item("Raspberries", date, "Fridge");
-        itemList.add(item);
-
-        item = new Item("Butter", date, "Fridge");
-        itemList.add(item);
+//        item = new Item("Cheddar", date, "Fridge");
+//        itemList.add(item);
+//
+//        item = new Item("Apples", date, "Pantry");
+//        itemList.add(item);
+//
+//        item = new Item("Bread", date, "Pantry");
+//        itemList.add(item);
+//
+//        item = new Item("Mozzarella", date, "Fridge");
+//        itemList.add(item);
+//
+//        item = new Item("Tofu", date, "Fridge");
+//        itemList.add(item);
+//
+//        item = new Item("Raspberries", date, "Fridge");
+//        itemList.add(item);
+//
+//        item = new Item("Butter", date, "Fridge");
+//        itemList.add(item);
     }
 
     // Call when the user taps the Add Item button
@@ -161,7 +163,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     }
 
     public void viewRecipes(View view) {
+        List<Item> checked = new ArrayList<>();
+        for(int i = 0; i < filteredList.size(); i++){
+            ItemAdapter.MyViewHolder vh = (ItemAdapter.MyViewHolder) recyclerView.findViewHolderForLayoutPosition(i);
+            if(vh != null) {
+                Log.d("hey",filteredList.get(i).getItemName());
+                CheckBox cb = vh.checkBox;
+                if (cb.isChecked()) {
+                    checked.add(filteredList.get(i));
+                }
+            }
+        }
         Intent intent = new Intent(this, RecipeFragment.class);
+        intent.putExtra("checked", (ArrayList<Item>) checked);
         startActivity(intent);
     }
 
@@ -174,4 +188,5 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         Intent intent = new Intent(this, ViewItem.class);
         startActivity(intent);
     }
+
 }
