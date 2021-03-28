@@ -61,6 +61,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AddItems" />
         </activity>
+        <activity
+            android:name=".CategoryFruit"
+            android:parentActivityName=".ItemCategories">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemCategories" />
+        </activity>
 
 
     </application>

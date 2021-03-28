@@ -36,10 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddItems extends AppCompatActivity implements RecyclerViewClickInterface {
+    private static final String LIST_STATE_KEY = "saveState";
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    public static ArrayList<String> addedItems = new ArrayList<String>();
 
     @Override
     public void onListItemClick(int position) {
@@ -53,6 +56,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_items);
+        setTitle("Add Items");
 
         recyclerView = (RecyclerView) findViewById(R.id.addItemList);
 
@@ -69,15 +73,21 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = formatter.format(date);
-        System.out.println(strDate);
-        Item item = new Item("Bananas", date, "Fridge");
-        itemList.add(item);
+        System.out.println(itemList);
+        System.out.println(addedItems);
+//        Item item = new Item("Bananas", date, "Fridge");
+//        itemList.add(item);
+//
+//        item = new Item("Beef", date, "Fridge");
+//        itemList.add(item);
+//
+//        item = new Item("Orange", date, "Fridge");
+//        itemList.add(item);
 
-        item = new Item("Beef", date, "Fridge");
-        itemList.add(item);
-
-        item = new Item("Orange", date, "Fridge");
-        itemList.add(item);
+        for(String newItemString : addedItems){
+            Item item = new Item(newItemString, date, "Fridge");
+            itemList.add(item);
+        }
     }
 
     public void addItemInput(View view) {
@@ -89,8 +99,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         String newItemName = editText.getText().toString();
         Item item = new Item(newItemName, date, "Fridge");
         itemList.add(item);
-//        item = new Item("Orange", date, "Fridge");
-//        itemList.add(item);
+        addedItems.add(newItemName);
         iAdapter.notifyItemInserted(itemList.size() - 1);
     }
 
