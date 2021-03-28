@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.android.material.snackbar.Snackbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.example.csci5115.AddItems;
 
 import android.widget.EditText;
@@ -42,11 +45,12 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
 
     @Override
     public void onListItemClick(int position) {
-//        System.out.println(itemList.get(position).getItemName());
-//        System.out.println(AddItems.addedItems);
         AddItems.addedItems.add(itemList.get(position).getItemName());
-    }
+//        Snackbar mySnackbar = Snackbar.make(R.layout.activity_category_fruit, "hello", Snackbar.LENGTH_SHORT);
+        Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Added Item: " + itemList.get(position).getItemName(),
+                Snackbar.LENGTH_SHORT).show();
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

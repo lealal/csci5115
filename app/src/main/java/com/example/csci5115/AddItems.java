@@ -1,6 +1,8 @@
 package com.example.csci5115;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -20,6 +22,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.lang.reflect.Array;
@@ -67,6 +70,37 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         recyclerView.setAdapter(iAdapter);
 
         prepareItemData();
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
+
+                int position = target.getAdapterPosition();
+                String tmp = addedItems.get(position);
+                iAdapter.notifyDataSetChanged();
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayoutAdd), "Deleted Item: " + addedItems.get(position),
+                        Snackbar.LENGTH_SHORT);
+                snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete(tmp, position));
+                snackbar.show();
+                itemList.remove(position);
+                addedItems.remove(position);
+            }
+
+
+        });
+        helper.attachToRecyclerView(recyclerView);
+    }
+    private void undoDelete(String tmp, int position) {
+        Date date = new Date();
+        Item item = new Item(tmp, date, "Fridge");
+        itemList.add(item);
+        addedItems.add(tmp);
+        iAdapter.notifyItemInserted(itemList.size() - 1);
     }
 
     private void prepareItemData() {
