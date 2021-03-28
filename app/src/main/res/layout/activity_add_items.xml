@@ -6,33 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".AddItems">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/itemList"
-        android:layout_width="309dp"
-        android:layout_height="382dp"
-        tools:ignore="MissingConstraints" />
-
-
     <EditText
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/enter_item_name"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/manualAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/add"
+        android:onClick="addItemInput"
+        app:layout_constraintBaseline_toBaselineOf="@+id/itemName"
+        app:layout_constraintStart_toEndOf="@+id/itemName" />
 
     <Button
         android:id="@+id/categoryButton"
@@ -40,24 +38,30 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
-        android:text="@string/search_by_category"
         android:onClick="itemCategories"
+        android:text="@string/search_by_category"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+        app:layout_constraintTop_toBottomOf="@+id/manualAddButton" />
 
-    <Button
-        android:id="@+id/manualAddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="@string/add"
-        app:layout_constraintBaseline_toBaselineOf="@+id/itemName"
-        app:layout_constraintStart_toEndOf="@+id/itemName" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addItemList"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryButton" />
 
     <Button
         android:id="@+id/addAllButton"
@@ -65,13 +69,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:text="@string/add_all_items"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView"/>
+        app:layout_constraintTop_toBottomOf="@+id/addItemList" />
 
     <ImageButton
         android:id="@+id/cameraButton"
@@ -79,15 +83,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:contentDescription="@string/todo"
         android:onClick="scanReceipt"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addAllButton"
         app:srcCompat="@android:drawable/ic_menu_camera" />
-    <!--app:layout_constraintBaseline_toBaselineOf="@+id/scrollView"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
