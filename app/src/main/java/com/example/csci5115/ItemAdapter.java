@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +24,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public Button itemName, itemAddedDate, location;
         public CheckBox checkBox;
+        public ImageView editItemIcon;
+        public View view;
 
         public MyViewHolder(View view) {
             super(view);
+            this.view = view;
             itemName = view.findViewById(R.id.itemName);
             checkBox = view.findViewById(R.id.checkBox);
+            editItemIcon = view.findViewById(R.id.editItemIcon);
             itemName.setOnClickListener(this);
         }
 
@@ -57,6 +62,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.itemName.setText(item.getItemName());
+
+        // On edit item click, create and pass new intent to EditItems here
+        holder.editItemIcon.setOnClickListener(v -> {
+            Toast.makeText(holder.view.getContext(), item.getItemName() + " clicked!", Toast.LENGTH_LONG).show();
+        });
     }
 
     @Override
