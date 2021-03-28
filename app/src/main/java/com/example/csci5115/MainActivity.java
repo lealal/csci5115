@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     private TabLayout tabLayout;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    public static ArrayList<Item> addedNewItems = new ArrayList<>();
+
     @Override
     public void onListItemClick(int position) {
         // This is where we will create intents and pass the itemList.get(position) object onto the next activity
@@ -133,6 +135,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
         item = new Item("Green Onions", date, "Fridge");
         itemList.add(item);
+
+        for(Item newItem : addedNewItems){
+            itemList.add(newItem);
+        }
 
 //        item = new Item("Cheddar", date, "Fridge");
 //        itemList.add(item);

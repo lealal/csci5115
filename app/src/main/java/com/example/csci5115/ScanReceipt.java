@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.Date;
+
 public class ScanReceipt extends AppCompatActivity {
 
     @Override
@@ -15,9 +17,15 @@ public class ScanReceipt extends AppCompatActivity {
     }
 
     public void addScanItems(View view){
-        AddItems.addedItems.add("Dragon Fruit");
-        AddItems.addedItems.add("Bananas");
-        AddItems.addedItems.add("Chicken");
+        Date date = new Date();
+        Item item = new Item("Dragon Fruit", date, "Fridge");
+        AddItems.addedItems.add(item);
+
+        item = new Item("Bananas", date, "Fridge");
+        AddItems.addedItems.add(item);
+
+        item = new Item("Chicken", date, "Fridge");
+        AddItems.addedItems.add(item);
         Intent intent = new Intent(this, AddItems.class);
         startActivity(intent);
     }
