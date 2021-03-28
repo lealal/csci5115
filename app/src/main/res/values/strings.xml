@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">csci5115</string>
-    <string name="add_items">Add Items</string>
+    <string name="add_items">+</string>
     <string name="recipes">Recipes</string>
     <string name="edit">Edit Item</string>
     <string name="view_item">View Item</string>
