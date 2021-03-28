@@ -47,6 +47,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ScanReceipt"
+            android:parentActivityName=".AddItems">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AddItems" />
+        </activity>
+        <activity
+            android:name=".ItemCategories"
+            android:parentActivityName=".AddItems">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AddItems" />
+        </activity>
+
 
     </application>
 
