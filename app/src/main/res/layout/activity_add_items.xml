@@ -6,32 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".AddItems">
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemList"
+        android:layout_width="309dp"
+        android:layout_height="382dp"
+        tools:ignore="MissingConstraints" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/itemList"
-                android:layout_width="309dp"
-                android:layout_height="382dp" />
-        </LinearLayout>
-    </ScrollView>
 
     <EditText
         android:id="@+id/itemName"
@@ -63,6 +44,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:text="@string/search_by_category"
+        android:onClick="itemCategories"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemName" />
@@ -101,6 +83,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:contentDescription="@string/todo"
+        android:onClick="scanReceipt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addAllButton"
