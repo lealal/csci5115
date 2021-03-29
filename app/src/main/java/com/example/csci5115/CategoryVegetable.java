@@ -40,16 +40,23 @@ import android.widget.EditText;
 public class CategoryVegetable extends AppCompatActivity implements RecyclerViewClickInterface {
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private ItemAdapter iAdapter;
+    private AddItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     public void onListItemClick(int position) {
         AddItems.addedItems.add(itemList.get(position));
-        Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Added Item: " + itemList.get(position).getItemName(),
-                Snackbar.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Added Item: " + itemList.get(position).getItemName(),
+                Snackbar.LENGTH_SHORT);
+        snackbar.setAction(R.string.snack_bar_undo, v -> undoAdd());
+        snackbar.show();
 
     }
+
+    private void undoAdd() {
+        AddItems.addedItems.remove(AddItems.addedItems.size() - 1);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +65,7 @@ public class CategoryVegetable extends AppCompatActivity implements RecyclerView
 
         recyclerView = (RecyclerView) findViewById(R.id.categoryVegetable);
 
-        iAdapter = new ItemAdapter(itemList, this);
+        iAdapter = new AddItemAdapter(itemList, this);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -100,6 +107,11 @@ public class CategoryVegetable extends AppCompatActivity implements RecyclerView
 
         item = new Item("Green Bell Pepper", date, "Fridge");
         itemList.add(item);
+    }
+
+    public void doneVegetable(View view){
+        Intent intent = new Intent(this, AddItems.class);
+        startActivity(intent);
     }
 
 }

@@ -42,17 +42,14 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
     private static final String LIST_STATE_KEY = "saveState";
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private ItemAdapter iAdapter;
+    private AddItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public static ArrayList<Item> addedItems = new ArrayList<>();
 
     @Override
     public void onListItemClick(int position) {
-        // This is where we will create intents and pass the itemList.get(position) object onto the next activity
-        Intent intent = new Intent(this, ViewItem.class);
-//        intent.putExtra("Item", item);
-        startActivity(intent);
+        System.out.println("Item Clicked");
     }
 
     @Override
@@ -63,7 +60,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
 
         recyclerView = (RecyclerView) findViewById(R.id.addItemList);
 
-        iAdapter = new ItemAdapter(itemList, this);
+        iAdapter = new AddItemAdapter(itemList, this);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linLayout1"
-        android:layout_width="200dp"
+        android:layout_width="184dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -22,8 +22,8 @@
 
         <ImageButton
             android:id="@+id/fruit_category"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="184dp"
+            android:layout_height="184dp"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
@@ -51,11 +51,11 @@
 
     <LinearLayout
         android:id="@+id/linLayout2"
-        android:layout_width="200dp"
+        android:layout_width="184dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="234dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="vertical"
@@ -65,8 +65,8 @@
 
         <ImageButton
             android:id="@+id/vegetable_category"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="184dp"
+            android:layout_height="184dp"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
@@ -94,11 +94,11 @@
 
     <LinearLayout
         android:id="@+id/linLayout3"
-        android:layout_width="200dp"
+        android:layout_width="184dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="485dp"
+        android:layout_marginTop="453dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="vertical"
@@ -108,8 +108,8 @@
 
         <ImageButton
             android:id="@+id/meat_category"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="184dp"
+            android:layout_height="184dp"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"

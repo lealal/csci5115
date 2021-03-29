@@ -15,4 +15,5 @@
     <string name="vegetables">Vegetables</string>
     <string name="meats">Meats</string>
     <string name="snack_bar_undo">Undo</string>
+    <string name="done">Done</string>
 </resources>

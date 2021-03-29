@@ -40,17 +40,23 @@ import android.widget.EditText;
 public class CategoryFruit extends AppCompatActivity implements RecyclerViewClickInterface {
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private ItemAdapter iAdapter;
+    private AddItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     public void onListItemClick(int position) {
         AddItems.addedItems.add(itemList.get(position));
-//        Snackbar mySnackbar = Snackbar.make(R.layout.activity_category_fruit, "hello", Snackbar.LENGTH_SHORT);
-        Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Added Item: " + itemList.get(position).getItemName(),
-                Snackbar.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Added Item: " + itemList.get(position).getItemName(),
+                Snackbar.LENGTH_SHORT);
+        snackbar.setAction(R.string.snack_bar_undo, v -> undoAdd());
+        snackbar.show();
 
     }
+
+    private void undoAdd() {
+        AddItems.addedItems.remove(AddItems.addedItems.size() - 1);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +65,7 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
 
         recyclerView = (RecyclerView) findViewById(R.id.categoryFruit);
 
-        iAdapter = new ItemAdapter(itemList, this);
+        iAdapter = new AddItemAdapter(itemList, this);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -101,5 +107,10 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
 
         item = new Item("Mango", date, "Fridge");
         itemList.add(item);
+    }
+
+    public void doneFruit(View view){
+        Intent intent = new Intent(this, AddItems.class);
+        startActivity(intent);
     }
 }
