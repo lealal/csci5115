@@ -28,6 +28,7 @@ public class EditItems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_items);
 
+        setTitle("Edit Item");
         item = (Item) getIntent().getSerializableExtra("Item");
         editName = findViewById(R.id.editName);
         editName.setText(item.getItemName());
