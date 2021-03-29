@@ -1,8 +1,14 @@
 package com.example.csci5115;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +21,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>  {
 
     private List<Item> itemList;
     private RecyclerViewClickInterface onClickListener;
@@ -43,7 +49,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         }
 
     }
-
     public ItemAdapter(List<Item> itemList, RecyclerViewClickInterface onClickListener) {
         this.itemList = itemList;
         this.onClickListener = onClickListener;
@@ -65,7 +70,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
         // On edit item click, create and pass new intent to EditItems here
         holder.editItemIcon.setOnClickListener(v -> {
-            Toast.makeText(holder.view.getContext(), item.getItemName() + " clicked!", Toast.LENGTH_LONG).show();
+            Item theItem = itemList.get(position);
+            Intent intent = new Intent(v.getContext(), EditItems.class);
+            intent.putExtra("Item", theItem);
+            v.getContext().startActivity(intent);
         });
     }
 
