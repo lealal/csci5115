@@ -7,7 +7,7 @@
     tools:context=".ItemCategories">
 
     <LinearLayout
-        android:id="@+id/linLayout"
+        android:id="@+id/linLayout1"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,7 +38,7 @@
             app:srcCompat="@drawable/orange" />
 
         <TextView
-            android:id="@+id/category_name"
+            android:id="@+id/category_name1"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -46,6 +46,92 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             tools:visibility="visible"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linLayout2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/vegetable_category"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/todo"
+            android:onClick="categoryVegetable"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vegetables" />
+
+        <TextView
+            android:id="@+id/category_name2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/vegetables"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linLayout3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="485dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/meat_category"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/todo"
+            android:onClick="categoryMeat"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/meats" />
+
+        <TextView
+            android:id="@+id/category_name3"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/meats"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:visibility="visible" />
 
     </LinearLayout>
 

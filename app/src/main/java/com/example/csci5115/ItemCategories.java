@@ -18,4 +18,14 @@ public class ItemCategories extends AppCompatActivity {
         Intent intent = new Intent(this, CategoryFruit.class);
         startActivity(intent);
     }
+
+    public void categoryVegetable(View view){
+        Intent intent = new Intent(this, CategoryVegetable.class);
+        startActivity(intent);
+    }
+
+    public void categoryMeat(View view){
+        Intent intent = new Intent(this, CategoryMeat.class);
+        startActivity(intent);
+    }
 }

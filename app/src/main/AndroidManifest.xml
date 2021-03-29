@@ -68,6 +68,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemCategories" />
         </activity>
+        <activity
+            android:name=".CategoryVegetable"
+            android:parentActivityName=".ItemCategories">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemCategories" />
+        </activity>
+        <activity
+            android:name=".CategoryMeat"
+            android:parentActivityName=".ItemCategories">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemCategories" />
+        </activity>
 
 
     </application>
