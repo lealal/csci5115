@@ -29,9 +29,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
+    public static Boolean firstTime = true;
     private RecyclerView.LayoutManager mLayoutManager;
     public static List<Item> getList() {
-        return itemList;
+        return filteredList;
+    }
+
+    public static void setList(List<Item> list) {
+        list = filteredList;
     }
     @Override
     public void onListItemClick(int position) {
@@ -57,8 +62,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(iAdapter);
 
-
-        prepareItemData();
+        if(firstTime){
+            prepareItemData();
+        }
+        firstTime = false;
         filteredList = itemList;
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -54,6 +54,9 @@ public class Item implements Serializable {
         return image;
     }
 
+    public void setImage(String newImage){
+        image = newImage;
+    }
     public void setCheckBox(CheckBox cb){this.checkBox = cb;}
 
     public CheckBox getCheckBox(){return this.checkBox;}

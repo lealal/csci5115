@@ -7,25 +7,6 @@
     tools:context=".EditItems">
 
     <EditText
-        android:id="@+id/editLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="74dp"
-        android:layout_marginRight="74dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/enter_item_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.433"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
-
-    <EditText
         android:id="@+id/editName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +31,7 @@
         android:layout_height="234dp"
         android:layout_marginStart="74dp"
         android:layout_marginLeft="74dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="74dp"
         android:layout_marginRight="74dp"
         android:layout_marginBottom="10dp"
@@ -58,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLocation"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -102,10 +83,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="74dp"
         android:layout_marginLeft="74dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="74dp"
         android:layout_marginRight="74dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="60dp"
+        android:onClick="editDelete"
         android:text="Delete Item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,14 +103,27 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="74dp"
         android:layout_marginRight="74dp"
-        android:layout_marginBottom="35dp"
         android:ems="10"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/editLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="214dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginLeft="74dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginRight="74dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
