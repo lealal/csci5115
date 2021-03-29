@@ -20,7 +20,7 @@
 
     <Button
         android:id="@+id/itemName"
-        android:layout_width="320dp"
+        android:layout_width="296dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textStyle="bold" />

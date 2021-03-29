@@ -36,6 +36,7 @@ public class RecipeFragment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_fragment);
+        setTitle("Recipes");
 
         recyclerView = findViewById(R.id.recipeRecyclerView);
         filteredRecipes = new ArrayList<>();

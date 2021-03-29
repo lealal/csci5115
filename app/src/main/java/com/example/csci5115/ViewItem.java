@@ -22,7 +22,9 @@ public class ViewItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
 
+
         item = (Item) getIntent().getSerializableExtra("Item");
+        setTitle(item.getItemName());
         viewItem = findViewById(R.id.viewItem);
         viewItem.setText(item.getItemName());
         viewDate = findViewById(R.id.viewDate);
