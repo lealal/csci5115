@@ -45,7 +45,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
     private ItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    public static ArrayList<String> addedItems = new ArrayList<String>();
+    public static ArrayList<Item> addedItems = new ArrayList<>();
 
     @Override
     public void onListItemClick(int position) {
@@ -81,9 +81,9 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
             public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
 
                 int position = target.getAdapterPosition();
-                String tmp = addedItems.get(position);
+                String tmp = addedItems.get(position).getItemName();
                 iAdapter.notifyDataSetChanged();
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayoutAdd), "Deleted Item: " + addedItems.get(position),
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayoutAdd), "Deleted Item: " + addedItems.get(position).getItemName(),
                         Snackbar.LENGTH_SHORT);
                 snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete(tmp, position));
                 snackbar.show();
@@ -99,7 +99,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         Date date = new Date();
         Item item = new Item(tmp, date, "Fridge");
         itemList.add(item);
-        addedItems.add(tmp);
+        addedItems.add(item);
         iAdapter.notifyItemInserted(itemList.size() - 1);
     }
 
@@ -118,22 +118,19 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
 //        item = new Item("Orange", date, "Fridge");
 //        itemList.add(item);
 
-        for(String newItemString : addedItems){
-            Item item = new Item(newItemString, date, "Fridge");
-            itemList.add(item);
+        for(Item newItem : addedItems){
+//            Item item = new Item(newItemString, date, "Fridge");
+            itemList.add(newItem);
         }
     }
 
     public void addItemInput(View view) {
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(date);
-        System.out.println(strDate);
         EditText editText = (EditText) findViewById(R.id.itemName);
         String newItemName = editText.getText().toString();
-        Item item = new Item(newItemName, date, "Fridge");
-        itemList.add(item);
-        addedItems.add(newItemName);
+        Item newItem = new Item(newItemName, date, "Fridge");
+        itemList.add(newItem);
+        addedItems.add(newItem);
         iAdapter.notifyItemInserted(itemList.size() - 1);
     }
 
@@ -144,6 +141,15 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
 
     public void itemCategories(View view){
         Intent intent = new Intent(this, ItemCategories.class);
+        startActivity(intent);
+    }
+
+    public void addAllItems(View view){
+        for(Item newItem : addedItems){
+            MainActivity.addedNewItems.add(newItem);
+        }
+        addedItems.clear();
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

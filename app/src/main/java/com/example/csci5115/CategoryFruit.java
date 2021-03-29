@@ -45,7 +45,7 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
 
     @Override
     public void onListItemClick(int position) {
-        AddItems.addedItems.add(itemList.get(position).getItemName());
+        AddItems.addedItems.add(itemList.get(position));
 //        Snackbar mySnackbar = Snackbar.make(R.layout.activity_category_fruit, "hello", Snackbar.LENGTH_SHORT);
         Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Added Item: " + itemList.get(position).getItemName(),
                 Snackbar.LENGTH_SHORT).show();

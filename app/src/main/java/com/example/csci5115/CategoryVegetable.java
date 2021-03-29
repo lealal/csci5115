@@ -45,7 +45,7 @@ public class CategoryVegetable extends AppCompatActivity implements RecyclerView
 
     @Override
     public void onListItemClick(int position) {
-        AddItems.addedItems.add(itemList.get(position).getItemName());
+        AddItems.addedItems.add(itemList.get(position));
         Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Added Item: " + itemList.get(position).getItemName(),
                 Snackbar.LENGTH_SHORT).show();
 
