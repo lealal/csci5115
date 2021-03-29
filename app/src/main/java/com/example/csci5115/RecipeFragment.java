@@ -68,12 +68,14 @@ public class RecipeFragment extends AppCompatActivity {
             List<String> value = entry.getValue();
 
             // Checked number of ingredients must be greater than the number of ingredients required for the recipe
-            if (filter && checked.size() >= value.size()) {
+            if (filter) {
+                if (checked.size() >= value.size()) {
 
-                // If our checked list contains all elements from the recipe's list of ingredients, add it to
-                // our recipes list, which gets passed to the RecipeAdapter
-                if (checked.containsAll(value)) {
-                    filteredRecipes.add(key);
+                    // If our checked list contains all elements from the recipe's list of ingredients, add it to
+                    // our recipes list, which gets passed to the RecipeAdapter
+                    if (checked.containsAll(value)) {
+                        filteredRecipes.add(key);
+                    }
                 }
             } else {
                 // This is the case where checked is null
