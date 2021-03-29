@@ -23,6 +23,7 @@ import java.util.TreeMap;
 
 public class RecipeFragment extends AppCompatActivity {
     private List<String> checked;
+    private String item;
     private List<Recipe> filteredRecipes;
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
@@ -47,17 +48,25 @@ public class RecipeFragment extends AppCompatActivity {
 
         checked = (List<String>) getIntent().getSerializableExtra("checked");
 
+//        item = (String) getIntent().getSerializableExtra("item");
+//        Log.d("Item", item);
+
         createMasterDictionary();
-        prepareRecipes();
+        if (checked != null){
+            prepareRecipes(true);
+        }
+        else {
+            prepareRecipes(false);
+        }
     }
 
-    private void prepareRecipes() {
+    private void prepareRecipes(boolean filter) {
         for (Map.Entry<Recipe, List<String>> entry : recipeIngredientDictionary.entrySet()) {
             Recipe key = entry.getKey();            // The recipe name
             List<String> value = entry.getValue();  // List of items required for the recipe
 
             // Checked number of ingredients must be greater than the number of ingredients required for the recipe
-            if (checked.size() >= value.size()) {
+            if (checked.size() >= value.size() && filter) {
 
                 // If our checked list contains all elements from the recipe's list of ingredients, add it to
                 // our recipes list, which gets passed to the RecipeAdapter
@@ -65,7 +74,13 @@ public class RecipeFragment extends AppCompatActivity {
                     filteredRecipes.add(key);
                 }
             }
+            else {
+                if (value.contains(item)){
+                    filteredRecipes.add(key);
+                }
+            }
         }
+
     }
 
     private void createMasterDictionary() {
