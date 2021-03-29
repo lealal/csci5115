@@ -15,7 +15,7 @@ public class ViewItem extends AppCompatActivity {
     private Item item;
     private TextView viewItem, viewDate;
     private ImageView imageView;
-    private Button button;
+    private Button recipeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +31,13 @@ public class ViewItem extends AppCompatActivity {
         int id = getResources().getIdentifier(item.getImage(), "drawable", getPackageName());
         Drawable drawable = getResources().getDrawable(id);
         imageView.setImageDrawable(drawable);
-        button = findViewById(R.id.recipeButton);
-//        button.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, RecipeFragment.class);
-//            ArrayList<String> checked = new ArrayList<>();
-//            checked.add(item.getItemName());
-//            intent.putExtra("checked",checked);
-//            startActivity(intent);
-//        });
+
+        recipeButton = findViewById(R.id.recipeButton);
+
+        recipeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RecipeFragment.class);
+            intent.putExtra("Item", item);
+            startActivity(intent);
+        });
     }
 }

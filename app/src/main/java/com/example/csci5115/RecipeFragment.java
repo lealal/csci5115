@@ -23,10 +23,13 @@ import java.util.TreeMap;
 
 public class RecipeFragment extends AppCompatActivity {
     private List<String> checked;
-    private String item;
+    private Item itemFromViewClass;
     private List<Recipe> filteredRecipes;
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
+
+    // Our main recipe-ingredient dictionary, which we'll use to generate recipes for checked items/individual
+    // items from the ViewItem class
     private Map<Recipe, List<String>> recipeIngredientDictionary;
 
     @Override
@@ -46,36 +49,36 @@ public class RecipeFragment extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        checked = (List<String>) getIntent().getSerializableExtra("checked");
-
-//        item = (String) getIntent().getSerializableExtra("item");
-//        Log.d("Item", item);
+        if (getIntent().getExtras() != null) {
+            checked = (List<String>) getIntent().getSerializableExtra("checked");
+            itemFromViewClass = (Item) getIntent().getSerializableExtra("Item");
+        }
 
         createMasterDictionary();
-        if (checked != null){
-            prepareRecipes(true);
-        }
-        else {
-            prepareRecipes(false);
-        }
+        // If the checked list is null, that means we're getting an individual item from the
+        // ViewItem class; else, it is the list of checked ingredients from the fridge
+        prepareRecipes(checked != null);
     }
 
     private void prepareRecipes(boolean filter) {
         for (Map.Entry<Recipe, List<String>> entry : recipeIngredientDictionary.entrySet()) {
-            Recipe key = entry.getKey();            // The recipe name
-            List<String> value = entry.getValue();  // List of items required for the recipe
+            // The recipe name
+            Recipe key = entry.getKey();
+            // List of items required for the recipe
+            List<String> value = entry.getValue();
 
             // Checked number of ingredients must be greater than the number of ingredients required for the recipe
-            if (checked.size() >= value.size() && filter) {
+            if (filter && checked.size() >= value.size()) {
 
                 // If our checked list contains all elements from the recipe's list of ingredients, add it to
                 // our recipes list, which gets passed to the RecipeAdapter
                 if (checked.containsAll(value)) {
                     filteredRecipes.add(key);
                 }
-            }
-            else {
-                if (value.contains(item)){
+            } else {
+                // This is the case where checked is null
+                // We're adding all possible recipes where this individual item (itemFromViewClass) can be used
+                if (value.contains(itemFromViewClass.getItemName())) {
                     filteredRecipes.add(key);
                 }
             }
