@@ -120,7 +120,6 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         for(Item newItem : addedItems){
 //            Item item = new Item(newItemString, date, "Fridge");
             itemList.add(newItem);
-
         }
     }
 
@@ -131,7 +130,6 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         Item newItem = new Item(newItemName, "Today", "Fridge");
         itemList.add(newItem);
         addedItems.add(newItem);
-
         iAdapter.notifyItemInserted(itemList.size() - 1);
     }
 

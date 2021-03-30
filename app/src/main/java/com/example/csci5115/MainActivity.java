@@ -31,16 +31,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     private TabLayout tabLayout;
     public static Boolean firstTime = true;
     private RecyclerView.LayoutManager mLayoutManager;
+    public static List<Item> getList() {
+        return itemList;
+    }
 
     public static ArrayList<Item> addedNewItems = new ArrayList<>();
 
-    public static List<Item> getList() {
-        return filteredList;
+    public static void setList(List<Item> list) {
+        itemList = list;
     }
 
-    public static void setList(List<Item> list) {
-        list = filteredList;
-    }
     @Override
     public void onListItemClick(int position) {
         // This is where we will create intents and pass the itemList.get(position) object onto the next activity
