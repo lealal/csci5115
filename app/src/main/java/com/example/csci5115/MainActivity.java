@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     }
 
     private void prepareItemData() {
-
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String date = df.format(c);
@@ -130,16 +129,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         item = new Item("Beef", date, "Freezer");
         itemList.add(item);
 
-        item = new Item("Orange", date, "Pantry", "orange");
-        itemList.add(item);
-
         item = new Item("Eggs", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Green Onions", date, "Fridge");
+        item = new Item("Green onions", date, "Fridge", "green_onions");
         itemList.add(item);
 
-        item = new Item("Bread", date, "Fridge");
+        item = new Item("Bread", date, "Fridge", "bread");
         itemList.add(item);
 
         item = new Item("Cheese", date, "Fridge");
