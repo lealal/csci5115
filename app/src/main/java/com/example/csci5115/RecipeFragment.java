@@ -23,21 +23,26 @@ import java.util.TreeMap;
 
 public class RecipeFragment extends AppCompatActivity {
     private List<String> checked;
-    private List<Recipe> recipes;
+    private Item itemFromViewClass;
+    private List<Recipe> filteredRecipes;
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
-    private Map<String, List<String>> recipeIngredientDictionary;
+
+    // Our main recipe-ingredient dictionary, which we'll use to generate recipes for checked items/individual
+    // items from the ViewItem class
+    private Map<Recipe, List<String>> recipeIngredientDictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_fragment);
+        setTitle("Recipes");
 
         recyclerView = findViewById(R.id.recipeRecyclerView);
-        recipes = new ArrayList<>();
+        filteredRecipes = new ArrayList<>();
         recipeIngredientDictionary = new TreeMap<>();
 
-        adapter = new RecipeAdapter(recipes);
+        adapter = new RecipeAdapter(filteredRecipes);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -45,82 +50,64 @@ public class RecipeFragment extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        checked = (List<String>) getIntent().getSerializableExtra("checked");
+        if (getIntent().getExtras() != null) {
+            checked = (List<String>) getIntent().getSerializableExtra("checked");
+            itemFromViewClass = (Item) getIntent().getSerializableExtra("Item");
+        }
 
         createMasterDictionary();
-        prepareRecipes();
+        // If the checked list is null, that means we're getting an individual item from the
+        // ViewItem class; else, it is the list of checked ingredients from the fridge
+        prepareRecipes(checked != null);
     }
 
-    private void prepareRecipes() {
-        Recipe recipe;
-
-        for (Map.Entry<String, List<String>> entry : recipeIngredientDictionary.entrySet()) {
-            String key = entry.getKey();            // The recipe name
-            List<String> value = entry.getValue();  // List of items required for the recipe
+    private void prepareRecipes(boolean filter) {
+        for (Map.Entry<Recipe, List<String>> entry : recipeIngredientDictionary.entrySet()) {
+            // The recipe name
+            Recipe key = entry.getKey();
+            // List of items required for the recipe
+            List<String> value = entry.getValue();
 
             // Checked number of ingredients must be greater than the number of ingredients required for the recipe
-            if (checked.size() >= value.size()) {
+            if (filter) {
+                if (checked.size() >= value.size()) {
 
-                // If our checked list contains all elements from the recipe's list of ingredients, add it to
-                // our recipes list, which gets passed to the RecipeAdapter
-                if (checked.containsAll(value)) {
-                    recipe = new Recipe(key, value);
-                    recipes.add(recipe);
+                    // If our checked list contains all elements from the recipe's list of ingredients, add it to
+                    // our recipes list, which gets passed to the RecipeAdapter
+                    if (checked.containsAll(value)) {
+                        filteredRecipes.add(key);
+                    }
+                }
+            } else {
+                // This is the case where checked is null
+                // We're adding all possible recipes where this individual item (itemFromViewClass) can be used
+                if (value.contains(itemFromViewClass.getItemName())) {
+                    filteredRecipes.add(key);
                 }
             }
         }
+
     }
 
     private void createMasterDictionary() {
-        Date date = new Date();
+        List<String> itemList = new ArrayList<>(Arrays.asList("Cheese", "Bread", "Butter"));
+        Recipe recipe = new Recipe("Grilled Cheese", itemList, "grilled_cheese", "https://www.allrecipes.com/recipe/23891/grilled-cheese-sandwich/");
+        recipeIngredientDictionary.put(recipe, itemList);
 
-        Item item1 = new Item("Bananas", date, "Pantry");
+        itemList = new ArrayList<>(Arrays.asList("Pasta", "Tomato sauce", "Beef"));
+        recipe = new Recipe("Pasta and meat sauce", itemList, "pasta_meat", "https://www.allrecipes.com/recipe/19343/marius-spaghetti-with-meat-sauce/");
+        recipeIngredientDictionary.put(recipe, itemList);
 
-        Item item2 = new Item("Beef", date, "Freezer");
+        itemList = new ArrayList<>(Arrays.asList("Potato"));
+        recipe = new Recipe("French fries", itemList, "french_fries", "https://www.allrecipes.com/recipe/35963/french-fried-potatoes/");
+        recipeIngredientDictionary.put(recipe, itemList);
 
-        Item item3 = new Item("Orange", date, "Pantry", "orange");
+        itemList = new ArrayList<>(Arrays.asList("Eggs", "Yogurt", "Butter"));
+        recipe = new Recipe("Yogurt Cake", itemList, "yogurt_cake", "https://www.allrecipes.com/recipe/17476/yogurt-cake/");
+        recipeIngredientDictionary.put(recipe, itemList);
 
-        List<String> itemList = new ArrayList<>(Arrays.asList(item1.getItemName(), item2.getItemName(), item3.getItemName()));
-
-        recipeIngredientDictionary.put("BananasBeefOrange", itemList);
-
-        Item item4 = new Item("Eggs", date, "Fridge");
-
-        Item item5 = new Item("Milk", date, "Fridge");
-
-        Item item6 = new Item("Yogurt", date, "Fridge");
-
-        Item item7 = new Item("Spinach", date, "Fridge");
-
-        itemList = new ArrayList<>(Arrays.asList(item1.getItemName(), item4.getItemName(), item5.getItemName()));
-
-        recipeIngredientDictionary.put("BananaEggsMilk", itemList);
-
-        itemList = new ArrayList<>(Arrays.asList(item2.getItemName(), item4.getItemName(), item6.getItemName()));
-
-        recipeIngredientDictionary.put("BeefEggsYogurt", itemList);
-
-        itemList = new ArrayList<>(Arrays.asList(item1.getItemName(), item2.getItemName(), item6.getItemName(), item7.getItemName()));
-
-        recipeIngredientDictionary.put("BananasBeefYogurtSpinach", itemList);
-
-        itemList = new ArrayList<>(Arrays.asList(item1.getItemName(), item2.getItemName(), item6.getItemName()));
-
-        recipeIngredientDictionary.put("BananasBeefYogurt", itemList);
-
-        Item WILDCARD = new Item("Avocado", date, "Fridge");
-
-        itemList = new ArrayList<>(Arrays.asList(item1.getItemName(), WILDCARD.getItemName()));
-
-        // The guacamole recipe doesn't show up because avocado is an item which doesn't exist in our fridge
-        recipeIngredientDictionary.put("Guacamole", itemList);
-
-        itemList = new ArrayList<>(Arrays.asList(item1.getItemName(), item3.getItemName()));
-
-        recipeIngredientDictionary.put("BananasOrange", itemList);
-
-        // JUST BEEF for a recipe - to check what happens in the freezer tab
-        itemList = new ArrayList<>(Arrays.asList(item2.getItemName()));
-        recipeIngredientDictionary.put("BEEF", itemList);
+        itemList = new ArrayList<>(Arrays.asList("Green onions", "Beef"));
+        recipe = new Recipe("Mongolian Beef and Spring Onions", itemList, "mongolian_beef", "https://www.allrecipes.com/recipe/201849/mongolian-beef-and-spring-onions/");
+        recipeIngredientDictionary.put(recipe, itemList);
     }
 }

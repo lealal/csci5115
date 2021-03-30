@@ -1,14 +1,8 @@
 package com.example.csci5115;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +15,10 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>  {
+public class AddItemAdapter extends RecyclerView.Adapter<AddItemAdapter.MyViewHolder> {
 
     private List<Item> itemList;
     private RecyclerViewClickInterface onClickListener;
-    private RecyclerViewClickInterface getOnClickListenerCheckBox;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public Button itemName, itemAddedDate, location;
@@ -49,7 +42,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         }
 
     }
-    public ItemAdapter(List<Item> itemList, RecyclerViewClickInterface onClickListener) {
+
+    public AddItemAdapter(List<Item> itemList, RecyclerViewClickInterface onClickListener) {
         this.itemList = itemList;
         this.onClickListener = onClickListener;
         notifyDataSetChanged();
@@ -58,7 +52,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list_row, parent, false);
+                .inflate(R.layout.add_item_list_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -67,17 +61,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.itemName.setText(item.getItemName());
-        holder.checkBox.setOnClickListener(v -> {
-            item.setChecked(!item.getChecked());
-        });
-
-        // On edit item click, create and pass new intent to EditItems here
-        holder.editItemIcon.setOnClickListener(v -> {
-            Item theItem = itemList.get(position);
-            Intent intent = new Intent(v.getContext(), EditItems.class);
-            intent.putExtra("Item", theItem);
-            v.getContext().startActivity(intent);
-        });
     }
 
     @Override

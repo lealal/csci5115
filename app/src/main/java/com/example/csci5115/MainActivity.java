@@ -1,7 +1,9 @@
 package com.example.csci5115;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.lang.reflect.Array;
@@ -25,21 +28,24 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
     private static List<Item> itemList = new ArrayList<>();
-    private static List<Item> filteredList = new ArrayList<>();
+    private List<Item> filteredList = new ArrayList<>();
+    private Item deletedItem;
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
-    public static Boolean firstTime = true;
     private RecyclerView.LayoutManager mLayoutManager;
+    public static ArrayList<Item> addedNewItems = new ArrayList<>();
+    private static boolean RUN_ONCE = true;
+
     public static List<Item> getList() {
         return itemList;
     }
 
-    public static ArrayList<Item> addedNewItems = new ArrayList<>();
 
     public static void setList(List<Item> list) {
         itemList = list;
     }
+
 
     @Override
     public void onListItemClick(int position) {
@@ -65,11 +71,45 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(iAdapter);
 
-        if(firstTime){
+        if (RUN_ONCE){
             prepareItemData();
         }
-        firstTime = false;
+        if (addedNewItems.size()>0){
+            for(Item newItem : addedNewItems){
+                itemList.add(newItem);
+            }
+        }
+        addedNewItems.clear();
         filteredList = itemList;
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
+
+                int position = target.getAdapterPosition();
+                String tmp = filteredList.get(position).getItemName();
+                iAdapter.notifyDataSetChanged();
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.recyclerView), "Deleted Item: " + filteredList.get(position).getItemName(),
+                        Snackbar.LENGTH_SHORT);
+                snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete(tmp, position));
+                snackbar.show();
+                String itemDelete = filteredList.get(position).getItemName();
+                deletedItem = filteredList.get(position);
+                int posItem=0;
+                for (int i = 0; i < itemList.size(); i++){
+                    if (itemList.get(i).getItemName().equals(itemDelete)){
+                        posItem=i;
+                    }
+                }
+                itemList.remove(posItem);
+                createFilteredList();
+            }
+        });
+        helper.attachToRecyclerView(recyclerView);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -118,60 +158,75 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
             }
         });
     }
+    private void undoDelete(String tmp, int position) {
+        itemList.add(deletedItem);
+        createFilteredList();
+        iAdapter.notifyItemInserted(filteredList.size() - 1);
+    }
+
+    private void createFilteredList(){
+        int pos = tabLayout.getSelectedTabPosition();
+        filteredList = new ArrayList<>();
+        if (pos == 0) {
+            // all
+            for (Item i : itemList) {
+                filteredList.add(i);
+            }
+        } else if (pos == 1) {
+            // pantry
+            for (Item i : itemList) {
+                if (i.getLocation().equals("Pantry")) {
+                    filteredList.add(i);
+                }
+            }
+        } else if (pos == 2) {
+            // fridge
+            for (Item i : itemList) {
+                if (i.getLocation().equals("Fridge")) {
+                    filteredList.add(i);
+                }
+            }
+        } else if (pos == 3) {
+            // freezer
+            for (Item i : itemList) {
+                if (i.getLocation().equals("Freezer")) {
+                    filteredList.add(i);
+                }
+            }
+        }
+        iAdapter.setItemList(filteredList);
+        recyclerView.setAdapter(iAdapter);
+    }
 
     private void prepareItemData() {
-
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String date = df.format(c);
-        Item item = new Item("Bananas", date, "Pantry");
-        itemList.add(item);
-
-        item = new Item("Beef", date, "Freezer");
-        itemList.add(item);
-
-        item = new Item("Orange", date, "Pantry", "orange");
+        Item item = new Item("Beef", date, "Freezer");
         itemList.add(item);
 
         item = new Item("Eggs", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Milk", date, "Fridge");
+        item = new Item("Green onions", date, "Fridge", "green_onions");
         itemList.add(item);
 
-        item = new Item("Yogurt", date, "Fridge");
+        item = new Item("Bread", date, "Fridge", "bread");
         itemList.add(item);
 
-        item = new Item("Spinach", date, "Fridge");
+        item = new Item("Cheese", date, "Pantry");
         itemList.add(item);
 
-        item = new Item("Green Onions", date, "Fridge");
+        item = new Item("Butter", date, "Fridge");
         itemList.add(item);
 
-        for(Item newItem : addedNewItems){
-            itemList.add(newItem);
-        }
+        item = new Item("Pasta", date, "Fridge");
+        itemList.add(item);
 
-//        item = new Item("Cheddar", date, "Fridge");
-//        itemList.add(item);
-//
-//        item = new Item("Apples", date, "Pantry");
-//        itemList.add(item);
-//
-//        item = new Item("Bread", date, "Pantry");
-//        itemList.add(item);
-//
-//        item = new Item("Mozzarella", date, "Fridge");
-//        itemList.add(item);
-//
-//        item = new Item("Tofu", date, "Fridge");
-//        itemList.add(item);
-//
-//        item = new Item("Raspberries", date, "Fridge");
-//        itemList.add(item);
-//
-//        item = new Item("Butter", date, "Fridge");
-//        itemList.add(item);
+        item = new Item("Tomato sauce", date, "Fridge");
+        itemList.add(item);
+
+        RUN_ONCE = false;
     }
 
     // Call when the user taps the Add Item button
@@ -183,12 +238,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     public void viewRecipes(View view) {
         ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < filteredList.size(); i++) {
-            ItemAdapter.MyViewHolder vh = (ItemAdapter.MyViewHolder) recyclerView.findViewHolderForLayoutPosition(i);
-            if (vh != null) {
-                CheckBox cb = vh.checkBox;
-                if (cb.isChecked()) {
-                    checked.add(filteredList.get(i).getItemName());
-                }
+            if (filteredList.get(i).getChecked()) {
+                checked.add(filteredList.get(i).getItemName());
             }
         }
 

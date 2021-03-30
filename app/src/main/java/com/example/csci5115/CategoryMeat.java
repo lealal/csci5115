@@ -21,6 +21,7 @@ import android.view.View;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.Toast;
+import java.util.Calendar;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -29,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.google.android.material.snackbar.Snackbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -40,7 +42,7 @@ import android.widget.EditText;
 public class CategoryMeat extends AppCompatActivity implements RecyclerViewClickInterface {
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private ItemAdapter iAdapter;
+    private AddItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -59,7 +61,7 @@ public class CategoryMeat extends AppCompatActivity implements RecyclerViewClick
 
         recyclerView = (RecyclerView) findViewById(R.id.categoryMeat);
 
-        iAdapter = new ItemAdapter(itemList, this);
+        iAdapter = new AddItemAdapter(itemList, this);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -68,10 +70,9 @@ public class CategoryMeat extends AppCompatActivity implements RecyclerViewClick
         prepareItemData();
     }
     private void prepareItemData() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(date);
-        System.out.println(strDate);
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String date = df.format(c);
         Item item = new Item("Alligator", date, "Fridge");
         itemList.add(item);
 

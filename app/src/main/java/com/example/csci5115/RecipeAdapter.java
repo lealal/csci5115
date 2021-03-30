@@ -2,11 +2,18 @@ package com.example.csci5115;
 
 import java.util.List;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHolder> {
@@ -16,15 +23,22 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView recipeName, recipeIngredients;
+        public ImageView recipeImage;
+        public View view;
+        public CardView cardView;
 
         public MyViewHolder(View view) {
             super(view);
+            this.view = view;
+            cardView = view.findViewById(R.id.recipeCard);
             recipeName = view.findViewById(R.id.recipeName);
             recipeIngredients = view.findViewById(R.id.recipeIngredients);
+            recipeImage = view.findViewById(R.id.recipeImage);
         }
 
         @Override
         public void onClick(View v) {
+            Toast.makeText(v.getContext(), " clicked!", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -46,6 +60,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Recipe recipe = recipeList.get(position);
         holder.recipeName.setText(recipe.getRecipeName());
+        int id = holder.view.getResources().getIdentifier(recipe.getRecipeImage(), "drawable", holder.view.getContext().getPackageName());
+        Drawable drawable = holder.view.getResources().getDrawable(id);
+        holder.recipeImage.setImageDrawable(drawable);
+        holder.cardView.setOnClickListener(v -> {
+            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(recipe.getRecipeURL()));
+            holder.view.getContext().startActivity(launchBrowser);
+        });
 
         int ingredientSize = recipe.getRecipeIngredients().size();
         String ingredientCount;
