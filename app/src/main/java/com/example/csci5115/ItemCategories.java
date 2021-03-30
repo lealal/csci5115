@@ -12,6 +12,7 @@ public class ItemCategories extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_categories);
+        setTitle("Categories");
     }
 
     public void categoryFruit(View view){

@@ -21,6 +21,8 @@
 
     <Button
         android:id="@+id/recipeButton"
+        android:backgroundTint="@color/olive"
+        android:textColor="@android:color/white"
         android:layout_width="156dp"
         android:layout_height="49dp"
         android:layout_marginTop="30dp"
