@@ -103,4 +103,9 @@ public class CategoryVegetable extends AppCompatActivity implements RecyclerView
         itemList.add(item);
     }
 
+    public void doneVegetable(View view){
+        Intent intent = new Intent(this, AddItems.class);
+        startActivity(intent);
+    }
+
 }

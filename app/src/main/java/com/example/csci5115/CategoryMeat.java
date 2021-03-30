@@ -104,4 +104,9 @@ public class CategoryMeat extends AppCompatActivity implements RecyclerViewClick
         itemList.add(item);
     }
 
+    public void doneMeat(View view){
+        Intent intent = new Intent(this, AddItems.class);
+        startActivity(intent);
+    }
+
 }

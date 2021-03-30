@@ -103,4 +103,9 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
         item = new Item("Mango", date, "Fridge");
         itemList.add(item);
     }
+
+    public void doneFruit(View view){
+        Intent intent = new Intent(this, AddItems.class);
+        startActivity(intent);
+    }
 }
