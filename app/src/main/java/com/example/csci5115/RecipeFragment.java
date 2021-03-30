@@ -24,10 +24,9 @@ import java.util.TreeMap;
 public class RecipeFragment extends AppCompatActivity {
     private List<String> checked;
     private List<Recipe> filteredRecipes;
-    private List<Recipe> recipes;
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
-    private Map<String, List<String>> recipeIngredientDictionary;
+    private Map<Recipe, List<String>> recipeIngredientDictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class RecipeFragment extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_fragment);
 
         recyclerView = findViewById(R.id.recipeRecyclerView);
-        recipes = new ArrayList<>();
         filteredRecipes = new ArrayList<>();
         recipeIngredientDictionary = new TreeMap<>();
 
@@ -54,8 +52,8 @@ public class RecipeFragment extends AppCompatActivity {
     }
 
     private void prepareRecipes() {
-        for (Map.Entry<String, List<String>> entry : recipeIngredientDictionary.entrySet()) {
-            String key = entry.getKey();            // The recipe name
+        for (Map.Entry<Recipe, List<String>> entry : recipeIngredientDictionary.entrySet()) {
+            Recipe key = entry.getKey();            // The recipe name
             List<String> value = entry.getValue();  // List of items required for the recipe
 
             // Checked number of ingredients must be greater than the number of ingredients required for the recipe
@@ -64,11 +62,7 @@ public class RecipeFragment extends AppCompatActivity {
                 // If our checked list contains all elements from the recipe's list of ingredients, add it to
                 // our recipes list, which gets passed to the RecipeAdapter
                 if (checked.containsAll(value)) {
-                    for (Recipe recipe : recipes){
-                        if (recipe.getRecipeName().equals(key)){
-                            filteredRecipes.add(recipe);
-                        }
-                    }
+                    filteredRecipes.add(key);
                 }
             }
         }
@@ -77,12 +71,10 @@ public class RecipeFragment extends AppCompatActivity {
     private void createMasterDictionary() {
         List<String> itemList = new ArrayList<>(Arrays.asList("Cheese", "Bread", "Butter"));
         Recipe recipe = new Recipe("Grilled Cheese", itemList, "grilled_cheese", "https://www.allrecipes.com/recipe/23891/grilled-cheese-sandwich/");
-        recipeIngredientDictionary.put(recipe.getRecipeName(), itemList);
-        recipes.add(recipe);
+        recipeIngredientDictionary.put(recipe, itemList);
 
         itemList = new ArrayList<>(Arrays.asList("Pasta", "Tomato sauce", "Beef"));
         recipe = new Recipe("Pasta and meat sauce", itemList, "pasta_meat", "https://www.allrecipes.com/recipe/19343/marius-spaghetti-with-meat-sauce/");
-        recipeIngredientDictionary.put(recipe.getRecipeName(), itemList);
-        recipes.add(recipe);
+        recipeIngredientDictionary.put(recipe, itemList);
     }
 }

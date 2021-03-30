@@ -2,8 +2,8 @@ package com.example.csci5115;
 
 import java.util.List;
 
-public class Recipe {
-<<<<<<< HEAD
+
+public class Recipe implements Comparable<Recipe> {
     private String recipeName, recipeURL, recipeImage;
     private List<String> recipeIngredients;
     private String recipeLink;
@@ -43,5 +43,10 @@ public class Recipe {
 
     public void setRecipeImage(String recipeImage) {
         this.recipeImage = recipeImage;
+    }
+
+    @Override
+    public int compareTo(Recipe r) {
+        return this.recipeName.compareTo(r.recipeName);
     }
 }
