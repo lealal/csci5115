@@ -76,5 +76,17 @@ public class RecipeFragment extends AppCompatActivity {
         itemList = new ArrayList<>(Arrays.asList("Pasta", "Tomato sauce", "Beef"));
         recipe = new Recipe("Pasta and meat sauce", itemList, "pasta_meat", "https://www.allrecipes.com/recipe/19343/marius-spaghetti-with-meat-sauce/");
         recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Potato"));
+        recipe = new Recipe("French fries", itemList, "french_fries", "https://www.allrecipes.com/recipe/35963/french-fried-potatoes/");
+        recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Eggs", "Yogurt", "Butter"));
+        recipe = new Recipe("Yogurt Cake", itemList, "yogurt_cake", "https://www.allrecipes.com/recipe/17476/yogurt-cake/");
+        recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Green onions", "Beef"));
+        recipe = new Recipe("Mongolian Beef and Spring Onions", itemList, "mongolian_beef", "https://www.allrecipes.com/recipe/201849/mongolian-beef-and-spring-onions/");
+        recipeIngredientDictionary.put(recipe, itemList);
     }
 }

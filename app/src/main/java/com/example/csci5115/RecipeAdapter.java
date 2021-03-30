@@ -2,6 +2,7 @@ package com.example.csci5115;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
@@ -63,7 +64,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         Drawable drawable = holder.view.getResources().getDrawable(id);
         holder.recipeImage.setImageDrawable(drawable);
         holder.cardView.setOnClickListener(v -> {
-            Toast.makeText(holder.view.getContext(), recipe.getRecipeName() + " clicked!", Toast.LENGTH_LONG).show();
+            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(recipe.getRecipeURL()));
+            holder.view.getContext().startActivity(launchBrowser);
         });
 
         int ingredientSize = recipe.getRecipeIngredients().size();

@@ -49,4 +49,7 @@ public class Recipe implements Comparable<Recipe> {
     public int compareTo(Recipe r) {
         return this.recipeName.compareTo(r.recipeName);
     }
+
+    public String getRecipeURL() { return recipeURL; }
+
 }
