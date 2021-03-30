@@ -148,9 +148,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         item = new Item("Green Onions", date, "Fridge");
         itemList.add(item);
 
-        for(Item newItem : addedNewItems){
-            itemList.add(newItem);
-        }
+        item = new Item("Bread", date, "Fridge");
+        itemList.add(item);
+
+        item = new Item("Cheese", date, "Fridge");
+        itemList.add(item);
+
+        item = new Item("Butter", date, "Fridge");
+        itemList.add(item);
+
+        item = new Item("Pasta", date, "Fridge");
+        itemList.add(item);
+
+        item = new Item("Tomato sauce", date, "Fridge");
+        itemList.add(item);
 
 //        item = new Item("Cheddar", date, "Fridge");
 //        itemList.add(item);

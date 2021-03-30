@@ -3,18 +3,20 @@ package com.example.csci5115;
 import java.util.List;
 
 public class Recipe {
-    private String recipeName;
+    private String recipeName, recipeURL, recipeImage;
     private List<String> recipeIngredients;
 
-    public Recipe(String recipeName, List<String> recipeIngredients) {
+    public Recipe(String recipeName, List<String> recipeIngredients, String recipeURL) {
         this.recipeName = recipeName;
         this.recipeIngredients = recipeIngredients;
+        this.recipeURL = recipeURL;
     }
 
-    public Recipe(String recipeName, List<String> recipeIngredients, String recipeImage) {
+    public Recipe(String recipeName, List<String> recipeIngredients, String recipeImage, String recipeURL) {
         this.recipeName = recipeName;
         this.recipeIngredients = recipeIngredients;
         this.recipeImage = recipeImage;
+        this.recipeURL = recipeURL;
     }
 
     public String getRecipeName() {
@@ -40,6 +42,4 @@ public class Recipe {
     public void setRecipeImage(String recipeImage) {
         this.recipeImage = recipeImage;
     }
-
-    private String recipeImage;
 }
