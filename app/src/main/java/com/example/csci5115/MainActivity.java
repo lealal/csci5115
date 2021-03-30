@@ -27,15 +27,16 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
-<<<<<<< HEAD
     private static List<Item> itemList = new ArrayList<>();
-    private static List<Item> filteredList = new ArrayList<>();
+    private List<Item> filteredList = new ArrayList<>();
     private Item deletedItem;
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
     public static Boolean firstTime = true;
     private RecyclerView.LayoutManager mLayoutManager;
+    private static boolean RUN_ONCE = true;
+
     public static List<Item> getList() {
         return itemList;
     }
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     public static void setList(List<Item> list) {
         itemList = list;
     }
+
 
     @Override
     public void onListItemClick(int position) {
@@ -70,10 +72,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(iAdapter);
 
-        if(firstTime){
+        if (RUN_ONCE){
             prepareItemData();
         }
-        firstTime = false;
         filteredList = itemList;
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -222,6 +223,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
         item = new Item("Tomato sauce", date, "Fridge");
         itemList.add(item);
+
+        RUN_ONCE = false;
     }
 
     // Call when the user taps the Add Item button
