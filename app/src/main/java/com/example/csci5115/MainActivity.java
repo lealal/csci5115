@@ -20,10 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
-    private List<Item> itemList = new ArrayList<>();
-    private List<Item> filteredList = new ArrayList<>();
+    private static List<Item> itemList = new ArrayList<>();
+    private static List<Item> filteredList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
@@ -31,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
     public static ArrayList<Item> addedNewItems = new ArrayList<>();
 
+    public static List<Item> getList() {
+        return itemList;
+    }
     @Override
     public void onListItemClick(int position) {
         // This is where we will create intents and pass the itemList.get(position) object onto the next activity
@@ -108,9 +113,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     }
 
     private void prepareItemData() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(date);
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String date = df.format(c);
         Item item = new Item("Bananas", date, "Pantry");
         itemList.add(item);
 

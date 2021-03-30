@@ -27,8 +27,10 @@ import com.google.android.material.tabs.TabLayout;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.google.android.material.snackbar.Snackbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -68,10 +70,9 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
         prepareItemData();
     }
     private void prepareItemData() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(date);
-        System.out.println(strDate);
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String date = df.format(c);
         Item item = new Item("Apple", date, "Fridge");
         itemList.add(item);
 
