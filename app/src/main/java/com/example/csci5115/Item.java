@@ -10,13 +10,14 @@ public class Item implements Serializable {
     private String itemAddedDate;
     private String location;
     private String image;
-    private CheckBox checkBox;
+    private boolean checked;
 
     public Item(String itemName, String itemAddedDate, String location) {
         this.itemName = itemName;
         this.itemAddedDate = itemAddedDate;
         this.location = location;
         this.image = "no_image";
+        this.checked = false;
     }
 
     public Item(String itemName, String itemAddedDate, String location, String image) {
@@ -24,6 +25,7 @@ public class Item implements Serializable {
         this.itemAddedDate = itemAddedDate;
         this.location = location;
         this.image = image;
+        this.checked = false;
     }
 
     public String getItemName() {
@@ -57,7 +59,8 @@ public class Item implements Serializable {
     public void setImage(String newImage){
         image = newImage;
     }
-    public void setCheckBox(CheckBox cb){this.checkBox = cb;}
 
-    public CheckBox getCheckBox(){return this.checkBox;}
+    public void setChecked(boolean value){this.checked = value;}
+
+    public boolean getChecked(){return this.checked;}
 }

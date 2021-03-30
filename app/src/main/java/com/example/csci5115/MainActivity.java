@@ -194,12 +194,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     public void viewRecipes(View view) {
         ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < filteredList.size(); i++) {
-            ItemAdapter.MyViewHolder vh = (ItemAdapter.MyViewHolder) recyclerView.findViewHolderForLayoutPosition(i);
-            if (vh != null) {
-                CheckBox cb = vh.checkBox;
-                if (cb.isChecked()) {
-                    checked.add(filteredList.get(i).getItemName());
-                }
+            if (filteredList.get(i).getChecked()) {
+                checked.add(filteredList.get(i).getItemName());
             }
         }
 

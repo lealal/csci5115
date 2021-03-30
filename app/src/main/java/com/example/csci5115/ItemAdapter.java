@@ -67,6 +67,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.itemName.setText(item.getItemName());
+        holder.checkBox.setOnClickListener(v -> {
+            item.setChecked(!item.getChecked());
+        });
 
         // On edit item click, create and pass new intent to EditItems here
         holder.editItemIcon.setOnClickListener(v -> {

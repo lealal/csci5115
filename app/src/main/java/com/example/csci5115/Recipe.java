@@ -3,8 +3,10 @@ package com.example.csci5115;
 import java.util.List;
 
 public class Recipe {
+<<<<<<< HEAD
     private String recipeName, recipeURL, recipeImage;
     private List<String> recipeIngredients;
+    private String recipeLink;
 
     public Recipe(String recipeName, List<String> recipeIngredients, String recipeURL) {
         this.recipeName = recipeName;
