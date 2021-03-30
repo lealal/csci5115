@@ -1,7 +1,9 @@
 package com.example.csci5115;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.lang.reflect.Array;
@@ -24,8 +27,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
+<<<<<<< HEAD
     private static List<Item> itemList = new ArrayList<>();
     private static List<Item> filteredList = new ArrayList<>();
+    private Item deletedItem;
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
@@ -70,6 +75,35 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         }
         firstTime = false;
         filteredList = itemList;
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
+
+                int position = target.getAdapterPosition();
+                String tmp = filteredList.get(position).getItemName();
+                iAdapter.notifyDataSetChanged();
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.recyclerView), "Deleted Item: " + filteredList.get(position).getItemName(),
+                        Snackbar.LENGTH_SHORT);
+                snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete(tmp, position));
+                snackbar.show();
+                String itemDelete = filteredList.get(position).getItemName();
+                deletedItem = filteredList.get(position);
+                int posItem=0;
+                for (int i = 0; i < itemList.size(); i++){
+                    if (itemList.get(i).getItemName().equals(itemDelete)){
+                        posItem=i;
+                    }
+                }
+                itemList.remove(posItem);
+                createFilteredList();
+            }
+        });
+        helper.attachToRecyclerView(recyclerView);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -117,6 +151,45 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
             }
         });
+    }
+    private void undoDelete(String tmp, int position) {
+        itemList.add(deletedItem);
+        createFilteredList();
+        iAdapter.notifyItemInserted(filteredList.size() - 1);
+    }
+
+    private void createFilteredList(){
+        int pos = tabLayout.getSelectedTabPosition();
+        filteredList = new ArrayList<>();
+        if (pos == 0) {
+            // all
+            for (Item i : itemList) {
+                filteredList.add(i);
+            }
+        } else if (pos == 1) {
+            // pantry
+            for (Item i : itemList) {
+                if (i.getLocation().equals("Pantry")) {
+                    filteredList.add(i);
+                }
+            }
+        } else if (pos == 2) {
+            // fridge
+            for (Item i : itemList) {
+                if (i.getLocation().equals("Fridge")) {
+                    filteredList.add(i);
+                }
+            }
+        } else if (pos == 3) {
+            // freezer
+            for (Item i : itemList) {
+                if (i.getLocation().equals("Freezer")) {
+                    filteredList.add(i);
+                }
+            }
+        }
+        iAdapter.setItemList(filteredList);
+        recyclerView.setAdapter(iAdapter);
     }
 
     private void prepareItemData() {
