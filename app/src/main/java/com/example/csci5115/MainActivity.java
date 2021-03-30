@@ -240,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         for (int i = 0; i < filteredList.size(); i++) {
             if (filteredList.get(i).getChecked()) {
                 checked.add(filteredList.get(i).getItemName());
+                filteredList.get(i).setChecked(false);
             }
         }
 
