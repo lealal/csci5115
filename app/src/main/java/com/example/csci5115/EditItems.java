@@ -67,9 +67,8 @@ public class EditItems extends AppCompatActivity {
             }
         }
         MainActivity.setList(realList);
-//        iAdapter.notifyDataSetChanged();
-
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
     public void editDelete(View view){
         for(int i = 0; i<realList.size(); i++){
@@ -80,8 +79,7 @@ public class EditItems extends AppCompatActivity {
             }
         }
         MainActivity.setList(realList);
-//        iAdapter.notifyDataSetChanged();
-
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

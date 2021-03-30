@@ -42,7 +42,7 @@ import android.widget.EditText;
 public class CategoryFruit extends AppCompatActivity implements RecyclerViewClickInterface {
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private ItemAdapter iAdapter;
+    private AddItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -61,7 +61,7 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
 
         recyclerView = (RecyclerView) findViewById(R.id.categoryFruit);
 
-        iAdapter = new ItemAdapter(itemList, this);
+        iAdapter = new AddItemAdapter(itemList, this);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

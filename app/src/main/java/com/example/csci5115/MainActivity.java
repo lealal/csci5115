@@ -33,15 +33,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
-    public static Boolean firstTime = true;
     private RecyclerView.LayoutManager mLayoutManager;
+    public static ArrayList<Item> addedNewItems = new ArrayList<>();
     private static boolean RUN_ONCE = true;
 
     public static List<Item> getList() {
         return itemList;
     }
 
-    public static ArrayList<Item> addedNewItems = new ArrayList<>();
 
     public static void setList(List<Item> list) {
         itemList = list;
@@ -75,6 +74,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         if (RUN_ONCE){
             prepareItemData();
         }
+        if (addedNewItems.size()>0){
+            for(Item newItem : addedNewItems){
+                itemList.add(newItem);
+            }
+        }
+        addedNewItems.clear();
         filteredList = itemList;
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -197,10 +202,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String date = df.format(c);
-        Item item = new Item("Bananas", date, "Pantry");
-        itemList.add(item);
-
-        item = new Item("Beef", date, "Freezer");
+        Item item = new Item("Beef", date, "Freezer");
         itemList.add(item);
 
         item = new Item("Eggs", date, "Fridge");

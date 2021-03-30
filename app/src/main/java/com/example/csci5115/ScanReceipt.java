@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ScanReceipt extends AppCompatActivity {
 
@@ -17,7 +20,9 @@ public class ScanReceipt extends AppCompatActivity {
     }
 
     public void addScanItems(View view){
-        Date date = new Date();
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String date = df.format(c);
         Item item = new Item("Dragon Fruit", date, "Fridge");
         AddItems.addedItems.add(item);
 

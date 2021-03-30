@@ -42,7 +42,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
     private static final String LIST_STATE_KEY = "saveState";
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private ItemAdapter iAdapter;
+    private AddItemAdapter iAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public static ArrayList<Item> addedItems = new ArrayList<>();
@@ -63,7 +63,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
 
         recyclerView = (RecyclerView) findViewById(R.id.addItemList);
 
-        iAdapter = new ItemAdapter(itemList, this);
+        iAdapter = new AddItemAdapter(itemList, this);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -106,19 +106,8 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = formatter.format(date);
-        System.out.println(itemList);
-        System.out.println(addedItems);
-//        Item item = new Item("Bananas", date, "Fridge");
-//        itemList.add(item);
-//
-//        item = new Item("Beef", date, "Fridge");
-//        itemList.add(item);
-//
-//        item = new Item("Orange", date, "Fridge");
-//        itemList.add(item);
 
         for(Item newItem : addedItems){
-//            Item item = new Item(newItemString, date, "Fridge");
             itemList.add(newItem);
         }
     }
