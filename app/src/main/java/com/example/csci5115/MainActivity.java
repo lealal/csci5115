@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = formatter.format(date);
-        System.out.println(strDate);
         Item item = new Item("Bananas", date, "Pantry");
         itemList.add(item);
 
@@ -169,19 +168,29 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     }
 
     public void viewRecipes(View view) {
-        List<Item> checked = new ArrayList<>();
+        ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < filteredList.size(); i++) {
             ItemAdapter.MyViewHolder vh = (ItemAdapter.MyViewHolder) recyclerView.findViewHolderForLayoutPosition(i);
             if (vh != null) {
-                Log.d("hey", filteredList.get(i).getItemName());
                 CheckBox cb = vh.checkBox;
                 if (cb.isChecked()) {
-                    checked.add(filteredList.get(i));
+                    checked.add(filteredList.get(i).getItemName());
                 }
             }
         }
+
         Intent intent = new Intent(this, RecipeFragment.class);
-        intent.putExtra("checked", (ArrayList<Item>) checked);
+
+        if (checked.size() != 0)
+            intent.putExtra("checked", (ArrayList<String>) checked);
+        else {
+            ArrayList<String> filteredStringList = new ArrayList<>();
+
+            for (Item item : filteredList)
+                filteredStringList.add(item.getItemName());
+
+            intent.putExtra("checked", filteredStringList);
+        }
         startActivity(intent);
     }
 
