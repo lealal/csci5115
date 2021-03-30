@@ -7,19 +7,19 @@ import java.util.Date;
 
 public class Item implements Serializable {
     private String itemName;
-    private Date itemAddedDate;
+    private String itemAddedDate;
     private String location;
     private String image;
     private CheckBox checkBox;
 
-    public Item(String itemName, Date itemAddedDate, String location) {
+    public Item(String itemName, String itemAddedDate, String location) {
         this.itemName = itemName;
         this.itemAddedDate = itemAddedDate;
         this.location = location;
         this.image = "no_image";
     }
 
-    public Item(String itemName, Date itemAddedDate, String location, String image) {
+    public Item(String itemName, String itemAddedDate, String location, String image) {
         this.itemName = itemName;
         this.itemAddedDate = itemAddedDate;
         this.location = location;
@@ -34,11 +34,11 @@ public class Item implements Serializable {
         this.itemName = itemName;
     }
 
-    public Date getItemAddedDate() {
+    public String getItemAddedDate() {
         return itemAddedDate;
     }
 
-    public void setItemAddedDate(Date itemAddedDate) {
+    public void setItemAddedDate(String itemAddedDate) {
         this.itemAddedDate = itemAddedDate;
     }
 
@@ -54,6 +54,9 @@ public class Item implements Serializable {
         return image;
     }
 
+    public void setImage(String newImage){
+        image = newImage;
+    }
     public void setCheckBox(CheckBox cb){this.checkBox = cb;}
 
     public CheckBox getCheckBox(){return this.checkBox;}

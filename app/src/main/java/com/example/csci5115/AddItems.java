@@ -96,8 +96,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         helper.attachToRecyclerView(recyclerView);
     }
     private void undoDelete(String tmp, int position) {
-        Date date = new Date();
-        Item item = new Item(tmp, date, "Fridge");
+        Item item = new Item(tmp, "lol", "Fridge");
         itemList.add(item);
         addedItems.add(item);
         iAdapter.notifyItemInserted(itemList.size() - 1);
@@ -128,7 +127,7 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
         Date date = new Date();
         EditText editText = (EditText) findViewById(R.id.itemName);
         String newItemName = editText.getText().toString();
-        Item newItem = new Item(newItemName, date, "Fridge");
+        Item newItem = new Item(newItemName, "Today", "Fridge");
         itemList.add(newItem);
         addedItems.add(newItem);
         iAdapter.notifyItemInserted(itemList.size() - 1);

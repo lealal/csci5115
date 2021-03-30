@@ -20,16 +20,26 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
-    private List<Item> itemList = new ArrayList<>();
-    private List<Item> filteredList = new ArrayList<>();
+    private static List<Item> itemList = new ArrayList<>();
+    private static List<Item> filteredList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter iAdapter;
     private TabLayout tabLayout;
+    public static Boolean firstTime = true;
     private RecyclerView.LayoutManager mLayoutManager;
+    public static List<Item> getList() {
+        return itemList;
+    }
 
     public static ArrayList<Item> addedNewItems = new ArrayList<>();
+
+    public static void setList(List<Item> list) {
+        itemList = list;
+    }
 
     @Override
     public void onListItemClick(int position) {
@@ -55,8 +65,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(iAdapter);
 
-
-        prepareItemData();
+        if(firstTime){
+            prepareItemData();
+        }
+        firstTime = false;
         filteredList = itemList;
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -108,9 +120,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     }
 
     private void prepareItemData() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(date);
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String date = df.format(c);
         Item item = new Item("Bananas", date, "Pantry");
         itemList.add(item);
 

@@ -82,6 +82,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemCategories" />
         </activity>
+        <activity
+            android:name=".ChangePicture"
+            android:parentActivityName=".EditItems">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EditItems" />
+        </activity>
 
 
     </application>
