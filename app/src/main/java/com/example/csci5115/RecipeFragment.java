@@ -109,5 +109,29 @@ public class RecipeFragment extends AppCompatActivity {
         itemList = new ArrayList<>(Arrays.asList("Green onions", "Beef"));
         recipe = new Recipe("Mongolian Beef and Spring Onions", itemList, "mongolian_beef", "https://www.allrecipes.com/recipe/201849/mongolian-beef-and-spring-onions/");
         recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Onions", "Beef", "Tomato Sauce", "Noodles"));
+        recipe = new Recipe("Skillet Lasagna", itemList, "skillet_lasagna", "https://www.allrecipes.com/recipe/273775/skillet-lasagna/");
+        recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Onions", "Green Peas", "Rice"));
+        recipe = new Recipe("Jasmine Rice", itemList, "jasmine_rice", "https://www.allrecipes.com/recipe/14136/jasmine-rice/");
+        recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Lemon", "Chicken", "Butter"));
+        recipe = new Recipe("Lemon Chicken", itemList, "lemon_chicken", "https://www.allrecipes.com/recipe/280307/lemon-thyme-chicken-breasts/");
+        recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Beef", "Bread", "Cheese"));
+        recipe = new Recipe("Cheeseburger Sliders", itemList, "cb_slider", "https://www.allrecipes.com/recipe/277748/cheeseburger-sliders/");
+        recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Yogurt", "Parsley", "Soy Milk"));
+        recipe = new Recipe("Vegan Ranch", itemList, "vegan_ranch", "https://www.allrecipes.com/recipe/261742/vegan-ranch-dressing/");
+        recipeIngredientDictionary.put(recipe, itemList);
+
+        itemList = new ArrayList<>(Arrays.asList("Rice", "Beans", "Tomatoes"));
+        recipe = new Recipe("Vegan Enchilada", itemList, "vegan_enchilada", "https://www.allrecipes.com/recipe/263660/vegan-enchilada-bake/");
+        recipeIngredientDictionary.put(recipe, itemList);
     }
 }
