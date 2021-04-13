@@ -106,7 +106,7 @@ public class RecipeFragment extends AppCompatActivity {
         recipe = new Recipe("Yogurt Cake", itemList, "yogurt_cake", "https://www.allrecipes.com/recipe/17476/yogurt-cake/");
         recipeIngredientDictionary.put(recipe, itemList);
 
-        itemList = new ArrayList<>(Arrays.asList("Green onions", "Beef"));
+        itemList = new ArrayList<>(Arrays.asList("Onions", "Beef"));
         recipe = new Recipe("Mongolian Beef and Spring Onions", itemList, "mongolian_beef", "https://www.allrecipes.com/recipe/201849/mongolian-beef-and-spring-onions/");
         recipeIngredientDictionary.put(recipe, itemList);
 
