@@ -50,9 +50,9 @@ public class AddItems extends AppCompatActivity implements RecyclerViewClickInte
     @Override
     public void onListItemClick(int position) {
         // This is where we will create intents and pass the itemList.get(position) object onto the next activity
-        Intent intent = new Intent(this, ViewItem.class);
+        // Intent intent = new Intent(this, ViewItem.class);
 //        intent.putExtra("Item", item);
-        startActivity(intent);
+        // startActivity(intent);
     }
 
     @Override
