@@ -73,10 +73,8 @@ public class CategoryFruit extends AppCompatActivity implements RecyclerViewClic
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String date = df.format(c);
-        Item item = new Item("Apple", date, "Fridge");
-        itemList.add(item);
 
-        item = new Item("Avocado", date, "Fridge");
+        Item item = new Item("Avocado", date, "Fridge");
         itemList.add(item);
 
         item = new Item("Banana", date, "Fridge");

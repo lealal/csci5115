@@ -202,13 +202,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String date = df.format(c);
-        Item item = new Item("Beef", date, "Freezer");
+        Item item = new Item("Pasta", date, "Freezer");
         itemList.add(item);
 
         item = new Item("Eggs", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Green onions", date, "Fridge", "green_onions");
+        item = new Item("Yogurt", date, "Fridge", "green_onions");
         itemList.add(item);
 
         item = new Item("Bread", date, "Fridge", "bread");
@@ -218,9 +218,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         itemList.add(item);
 
         item = new Item("Butter", date, "Fridge");
-        itemList.add(item);
-
-        item = new Item("Pasta", date, "Fridge");
         itemList.add(item);
 
         item = new Item("Tomato sauce", date, "Fridge");

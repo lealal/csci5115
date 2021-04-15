@@ -72,7 +72,7 @@ public class CategoryVegetable extends AppCompatActivity implements RecyclerView
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String date = df.format(c);
-        Item item = new Item("Artichokes", date, "Fridge");
+        Item item = new Item("Beans", date, "Fridge");
         itemList.add(item);
 
         item = new Item("Broccoli", date, "Fridge");
@@ -81,13 +81,10 @@ public class CategoryVegetable extends AppCompatActivity implements RecyclerView
         item = new Item("Carrots", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Cauliflower", date, "Fridge");
+        item = new Item("Tomatoes", date, "Fridge");
         itemList.add(item);
 
-        item = new Item("Corn", date, "Fridge");
-        itemList.add(item);
-
-        item = new Item("Ginger", date, "Fridge");
+        item = new Item("Onions", date, "Fridge");
         itemList.add(item);
 
         item = new Item("Mushrooms", date, "Fridge");
